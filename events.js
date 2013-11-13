@@ -182,6 +182,9 @@ SamsonJS.extend({
 		// Указатель на самого себя
 		var _self = this;		
 		
+		// If no handler is passed
+		if( pageInitHandler == undefined ) return this; 
+		
 		// Обработчик загрузки страницы
 		var handler = function()
 		{		
