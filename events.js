@@ -579,5 +579,10 @@ SamsonJS.extend({
 			EventHandler 	: mouseHandler,
 			EventOptions	: options
 		});	
-	}
+	},
+
+    select:function()
+    {
+
+    },
 });
