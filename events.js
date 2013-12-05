@@ -257,7 +257,14 @@ SamsonJS.extend({
 			EventName 		: 'change',
 			preventDefault 	: preventDefault,
 			stopPrapagation : stopPrapagation,
-			EventHandler 	: changeHandler,
+            EventHandler 	: function( obj, options, event)
+            {
+                // Get selected option
+                var selected = s('option:selected',obj);
+
+                // Call event handler
+                changeHandler(obj, options, event, selected);
+            },
 			EventOptions	: options
 		});	
 	},
@@ -579,10 +586,5 @@ SamsonJS.extend({
 			EventHandler 	: mouseHandler,
 			EventOptions	: options
 		});	
-	},
-
-    select:function()
-    {
-
-    },
+	}
 });
