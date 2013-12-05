@@ -386,7 +386,7 @@ SamsonJS.extend({
 	 * Поменять местами тв дереве DOM документа, текущий элемент  и переданный
 	 * 
 	 * @param objToReplace Указатель на объект для замены
-	 * @returns {SamsonJS} Указатель на себя для цепирования
+	 * @returns {SamsonJS} Указатель на новый элемент для цепирования
 	 */
 	replace : function ( objToReplace )
 	{
@@ -397,7 +397,7 @@ SamsonJS.extend({
 		this.DOMElement.parentNode.replaceChild( objToReplace.DOMElement, this.DOMElement );	
 	
 		// Вернем самого себя
-		return this;	
+		return objToReplace;	
 	},
 	
 	/**
