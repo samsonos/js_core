@@ -41,7 +41,9 @@ SamsonJS.extend({
 			}
 		}	
 		//else if ( typeof XMLHttpRequest != 'undefined') sjsXHR = new XMLHttpRequest();
-		
+
+        // Add special async header
+        sjsXHR.setRequestHeader('SJSAsync', 'true');
 		
 		// Обработчик получения ответа от сервера
 		sjsXHR.onreadystatechange = function() 
