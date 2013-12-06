@@ -41,9 +41,6 @@ SamsonJS.extend({
 			}
 		}	
 		//else if ( typeof XMLHttpRequest != 'undefined') sjsXHR = new XMLHttpRequest();
-
-        // Add special async header
-        sjsXHR.setRequestHeader('SJSAsync', 'true');
 		
 		// Обработчик получения ответа от сервера
 		sjsXHR.onreadystatechange = function() 
@@ -63,7 +60,10 @@ SamsonJS.extend({
 		if (!type) type = 'POST';
 		
 		// Установим параметры запроса	
-		sjsXHR.open( type, url, true, "", "" ); 	
+		sjsXHR.open( type, url, true, "", "" );
+
+        // Add special async header
+        sjsXHR.setRequestHeader('SJSAsync', 'true');
 				
 		// Если нам передали НЕ форму
 		if( (window.FormData === undefined) || !( data instanceof FormData) ) 
