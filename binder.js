@@ -15,22 +15,26 @@ var SJSBinder = {
             // Bind click event
             clickable.click(function()
             {
+				var beforeHandlerStatus = true;
                 // If external response handler is passed
-                if( beforeHandler ) beforeHandler( response );
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler( response );
 
-                // Perform async request
-                s.ajax(clickable.a('href'),function(response)
-                {
-                    try
-                    {
-                        // Parse server response
-                        response = JSON.parse(response);
+                // If external response handler return true status
+				if (beforeHandlerStatus) {
+					// Perform async request
+					s.ajax(clickable.a('href'),function(response)
+					{
+						try
+						{
+							// Parse server response
+							response = JSON.parse(response);
 
-                        // If external response handler is passed
-                        if( responseHandler ) responseHandler( response );
-                    }
-                    catch(e){}
-                });
+							// If external response handler is passed
+							if( responseHandler ) responseHandler( response );
+						}
+						catch(e){}
+					});
+				}
             }, true, true );
         });
     },
@@ -39,25 +43,32 @@ var SJSBinder = {
      *
      * @param responseHandler
      */
-    ajaxSubmit : function( responseHandler )
+    ajaxSubmit : function( responseHandler, beforeHandler )
     {
         // Iterate all elements
         return this.each(function(form)
         {
             form.submit(function()
-            {
-                form.ajaxForm(function(response)
-                {
-                    try
-                    {
-                        // Parse server response
-                        response = JSON.parse(response);
+            {			
+				var beforeHandlerStatus = true;
+                // If external response handler is passed
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler( response );
 
-                        // If external response handler is passed
-                        if( responseHandler ) responseHandler( response );
-                    }
-                    catch(e){}
-                });
+                // If external response handler return true status
+				if (beforeHandlerStatus) {
+					form.ajaxForm(function(response)
+					{
+						try
+						{
+							// Parse server response
+							response = JSON.parse(response);
+
+							// If external response handler is passed
+							if( responseHandler ) responseHandler( response );
+						}
+						catch(e){}
+					});
+				}
             }, true, true );
         });
     }
