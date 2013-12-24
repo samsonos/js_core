@@ -17,7 +17,7 @@ var SJSBinder = {
             {
 				var beforeHandlerStatus = true;
                 // If external response handler is passed
-                if( beforeHandler ) beforeHandlerStatus = beforeHandler( response );
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler();
 
                 // If external response handler return true status
 				if (beforeHandlerStatus) {
@@ -52,7 +52,7 @@ var SJSBinder = {
             {			
 				var beforeHandlerStatus = true;
                 // If external response handler is passed
-                if( beforeHandler ) beforeHandlerStatus = beforeHandler( response );
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler();
 
                 // If external response handler return true status
 				if (beforeHandlerStatus) {
