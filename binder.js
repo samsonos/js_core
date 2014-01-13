@@ -17,7 +17,7 @@ var SJSBinder = {
             {
 				var beforeHandlerStatus = true;
                 // If external response handler is passed
-                if( beforeHandler ) beforeHandlerStatus = beforeHandler();
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler(clickable);
 
                 // If external response handler return true status
 				if (beforeHandlerStatus) {
@@ -30,7 +30,7 @@ var SJSBinder = {
 							response = JSON.parse(response);
 
 							// If external response handler is passed
-							if( responseHandler ) responseHandler( response );
+							if( responseHandler ) responseHandler( response, clickable );
 						}
 						catch(e){}
 					});
@@ -52,7 +52,7 @@ var SJSBinder = {
             {			
 				var beforeHandlerStatus = true;
                 // If external response handler is passed
-                if( beforeHandler ) beforeHandlerStatus = beforeHandler();
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler(clickable);
 
                 // If external response handler return true status
 				if (beforeHandlerStatus) {
@@ -64,7 +64,7 @@ var SJSBinder = {
 							response = JSON.parse(response);
 
 							// If external response handler is passed
-							if( responseHandler ) responseHandler( response );
+							if( responseHandler ) responseHandler( response, clickable);
 						}
 						catch(e){}
 					});
