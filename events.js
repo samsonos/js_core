@@ -204,7 +204,7 @@ SamsonJS.extend({
 				//s.trace('Обработчик инициализация страницы('+_self.selector+') - '+SamsonPHP.elapsed()+' мс',true);
 				
 				// Выполним обработчик
-				pageInitHandler( element );
+                element.each(pageInitHandler);
 			}
 		};	
 			
