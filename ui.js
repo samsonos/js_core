@@ -109,7 +109,7 @@ var SamsonJSUI =
 		return this.each(function(obj)
 		{
 			// Если у элемента DOM присутствует указанный класс
-			if ( obj.hasClass( _className ) ) obj.className( obj.className().replace( new RegExp('(\\s|^)' + _className + '(\\s|$)'), '' ));	 
+			if ( obj.hasClass( _className ) ) obj.className( obj.className().replace( new RegExp('(\\s|^)' + _className + '(\\s|$)'), ' ' ));	 
 		});	
 	},
 	
