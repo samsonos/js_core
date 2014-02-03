@@ -66,7 +66,7 @@ var SJSBinder = {
 							// If external response handler is passed
 							if( responseHandler ) responseHandler( response, form);
 						}
-						catch(e){}
+						catch(e){s.trace(e.toString())}
 					});
 				}
             }, true, true );
