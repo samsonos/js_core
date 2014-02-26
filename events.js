@@ -40,6 +40,9 @@ SamsonJS.extend({
 				// Указатель на текущий элемент DOM
 				var de = obj.DOMElement;
 				
+				// No events for TextNodes
+				if ( de.nodeType == 3 ) return true;
+				
 				// Если не передан обработчик события и объект поддерживает указанное событие
 				// считаем что это запрос на вызов события
 				if( ! EventHandler && de[ EventName ])
@@ -82,10 +85,10 @@ SamsonJS.extend({
 						
 						// Запретить стандартное поведение элемента, или если это было запрещено в обработчике
 						if( options.stopPrapagation || !result) (event.stopPropagation) ? (event.stopPropagation()) : (event.cancelBubble = true );
-					};						
-										
+					};					
+					
 					// Создадим коллекцию для хранения обработчиков событий для данного элемента
-					de.EventListeners = de.EventListeners == undefined ? {} : de.EventListeners;
+					de.EventListeners = de.EventListeners === undefined ? { 'vilka':1 } : de.EventListeners;
 					// Безопасно создадим коллекцию для обработчиков указанного события
 					de.EventListeners[ EventName ] = !de.EventListeners[ EventName ] ? [] : de.EventListeners[ EventName ];
 					// Добавим созданный обработчик события в коллекцию обработчиков
@@ -96,11 +99,11 @@ SamsonJS.extend({
 					// Проверим если элемент DOM поддерживает метод "attachEvent", преобразуем название события
 					else if(de.attachEvent) de.attachEvent( 'on' + EventName, _baseEventHandler );
 					// Самый de вариант повесим обработчик напрямую на свойство элемента
-					else if( DOMElement[ 'on' + EventName ] ) de[ 'on' + EventName ] = _baseEventHandler ;
+					else if( de[ 'on' + EventName ] ) de[ 'on' + EventName ] = _baseEventHandler ;
 					// Ниче не вышло
 					else s.trace('Не удалось повесить событие:' + EventName + ' для селектора: ' + obj.selector );
 					
-					//s.trace('Добавляем событие:' + EventName);
+					//s.trace('Добавляем событие:' + EventName);				
 				}
 			});				
 		}
