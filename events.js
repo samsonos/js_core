@@ -85,7 +85,7 @@ SamsonJS.extend({
 					};						
 										
 					// Создадим коллекцию для хранения обработчиков событий для данного элемента
-					de.EventListeners = !de.EventListeners ? {} : de.EventListeners;
+					de.EventListeners = de.EventListeners == undefined ? {} : de.EventListeners;
 					// Безопасно создадим коллекцию для обработчиков указанного события
 					de.EventListeners[ EventName ] = !de.EventListeners[ EventName ] ? [] : de.EventListeners[ EventName ];
 					// Добавим созданный обработчик события в коллекцию обработчиков
