@@ -60,14 +60,11 @@ SamsonJS.extend({
 		if (!type) type = 'POST';
 		
 		// Установим параметры запроса	
-		sjsXHR.open( type, url, true, "", "" );
-
-        // Add special async header
-        sjsXHR.setRequestHeader('SJSAsync', 'true');
-				
+		sjsXHR.open( type, url, true, "", "" );        
+			
 		// Если нам передали НЕ форму
 		if( (window.FormData === undefined) || !( data instanceof FormData) ) 
-		{
+		{		
 			// Установим правильные заголовки
 			sjsXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			
@@ -77,6 +74,9 @@ SamsonJS.extend({
 			
 			//data = encodeURIComponent(data);
 		}
+		
+		// Add special async header
+        sjsXHR.setRequestHeader('SJSAsync', 'true');
 		
 		// Обработчик перед отправкой запроса
 		if( beforeHandler ) beforeHandler( url, data );
@@ -272,8 +272,8 @@ SamsonJS.extend({
 						    	
 			    	// Разместим фрейм где-то в "молоке"
 			    	frame.css('position', 'absolute');			   
-			    	frame.css('top', '-9999px');		
-			    	frame.css('left', '-9999px');	 		
+			    	frame.css('top', '-9999px');
+			    	frame.css('left', '-9999px');
 			    	//frame.css('width','100%');
 			    	//frame.css('height','200px');
 			    	
@@ -308,7 +308,10 @@ SamsonJS.extend({
 	    		
 			    		// Подменим в отправляемой форме клона на оригинал
 			    		newForm.append( input );			 
-			    	});				    
+			    	});
+
+                    // Append special hidden element to tell SamsonPHP that this is async event
+                    newForm.append('<input type="hidden" name="SJSASYNC" value="true">');
 
 			    	// Добавим форму во фрейм
 			    	if( s.IEVersionLowerThan(9) ) frame.append( newForm );			    	
@@ -320,16 +323,19 @@ SamsonJS.extend({
 			    		EventHandler : function( event, target )				    	
 				    	{			
 			    			//s.trace(frame.DOMElement.document.location.href);			    			
-			    			
+
+                            var response = frame.html().replace(/\"\\\"/,'\"');
+
 			    			// Вызовем обработчик получения ответа от сервера
-			    			if( handler ) handler( frame.html() );
+			    			if( handler ) handler( response );
 			    			
-			    			//s(document.body).append( '<textarea>'+frame.html()+'</textarea>');
+			    			//s(document.body).append( '<textarea cols="50" rows="50">'+response+'</textarea>');
 			    			
 				    		// Удалим фрейм
 						    frame.remove();
 				    	}
 			    	});
+
 			   			 	    
 				    // Отправим нашу виртуальную форму на сервер
 				    newForm.DOMElement.submit();
