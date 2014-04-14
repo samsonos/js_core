@@ -12,4 +12,7 @@ namespace samson\js\core;
 class SamsonJSConnector extends \samson\core\CompressableExternalModule
 {
 	protected $id = 'samsonjs';
+	
+	/** Module dependencies */
+	protected $requirements = array('core');
 }
