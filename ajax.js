@@ -21,7 +21,7 @@ SamsonJS.extend({
 		var _self = this;
 		
 		// Укаазатель на текущий объект для ассинхронного запроса
-		var sjsXHR = null;		
+		var sjsXHR = null;
 		
 		// Проверим переданный URL для запроса
 		if( ! url ) return false;
@@ -241,7 +241,7 @@ SamsonJS.extend({
 	ajaxForm: function( options )
 	{				
 		// Установим указатель на самого себя
-		_self = this;	
+		_self = this;
 		
 		// Получим обработчик ответа
 		var handler = typeof options === 'object' ? options.handler : options;

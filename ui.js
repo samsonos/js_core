@@ -172,9 +172,10 @@ var SamsonJSUI =
         while ( obj ) 
         {       	
         	// Прибавим значение
-        	_left += obj.offsetLeft-obj.scrollLeft;
-        	_top += obj.offsetTop-obj.scrollTop;
-        	
+        	/*_left += obj.offsetLeft-obj.scrollLeft;
+        	_top += obj.offsetTop-obj.scrollTop;*/
+        	_left += obj.offsetLeft;
+        	_top += obj.offsetTop;
         	// Передвинем указатель на родительский "смещенный" элемент
         	obj = obj.offsetParent;            
         }		

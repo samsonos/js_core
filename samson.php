@@ -1,5 +1,5 @@
 <?php
-namespace samson\js;
+namespace samson\js\core;
 
 /**
  * Интерфейс для подключения модуля в ядро фреймворка SamsonPHP
