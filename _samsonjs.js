@@ -323,9 +323,6 @@ function s( selector, parent ){ return SamsonJS( selector, parent ); };
 	window.SamsonJS = window.S = window.s = SamsonJS;
 	
 	// Сообщим всем что SamsonJS успешно загружен
-	s.trace('Фреймворк SamsonJS '+SamsonJS.version+' - Успешно загружен в систему');
-	
-	// Предложения по работе
-	s.trace('Нравится JavaScript, хочешь узнать много нового и зарабатывать на этом деньги? Пиши info@samsonos.com');
+	s.trace('Framework SamsonJS '+SamsonJS.version+' - successfully loaded');
 	
 })(window); // Выполним привязку фреймворка к "окну" приложения
