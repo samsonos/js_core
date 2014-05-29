@@ -136,14 +136,21 @@ SamsonJS.extend({
     scrollLeftTo: function( fValue, speed, finishHandler )
     {
         // Если нам передан объект, учтем его смещения и текущую прокрутку
-        if( typeof( fValue ) == 'object' ) fValue = fValue.offset().left;
+        if( typeof( fValue ) == 'object' ) {
+            // Pointer to object
+            var obj = fValue;
+
+            fValue = obj.offset().left;
+
+            // Remove parent container offset to avoid "over scrolling"
+            if (obj.parent().length) {
+                fValue -= obj.parent().offset().left;
+            }
+        }
         // Если конечное значение не передано - установим максимальное
         else if ( fValue == undefined ) fValue = this.DOMElement.scrollLeft;
 
-        // Remove parent container offset to avoid "overscrolling"
-        if (fValue.parent().length) {
-            fValue -= fValue.parent().offset().left;
-        }
+
 
         // Выполним универсальный аниматор с указанием конкретного параметра
         return this.animate( fValue, 'scrollLeft', speed, finishHandler );
