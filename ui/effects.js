@@ -124,6 +124,25 @@ SamsonJS.extend({
 		// Выполним универсальный аниматор с указанием конкретного параметра
 		return this.animate( fValue, 'scrollTop', speed, finishHandler );	
 	},
+
+    /**
+     * Выполнить анимированное изменение горизонтальной прокрутки элемента
+     * @memberOf SamsonJS
+     * @param {Object|Number} 	fValue			Конечное значение параметра элемента
+     * @param {String} 			speed			Скорость изменения параметра
+     * @param {Function}		finishHandler	Обработчик завершения изменения параметра
+     * @returns {SamsonJS}	Указатель на себя цепирования
+     */
+    scrollLeftTo: function( fValue, speed, finishHandler )
+    {
+        // Если нам передан объект, учтем его смещения и текущую прокрутку
+        if( typeof( fValue ) == 'object' ) fValue = fValue.offset().left;
+        // Если конечное значение не передано - установим максимальное
+        else if ( fValue == undefined ) fValue = this.DOMElement.scrollLeft;
+
+        // Выполним универсальный аниматор с указанием конкретного параметра
+        return this.animate( fValue, 'scrollLeft', speed, finishHandler );
+    },
 	
 	/**
 	 * Выполнить анимированное изменение вертикальной прокрутки страницы
