@@ -140,6 +140,11 @@ SamsonJS.extend({
         // Если конечное значение не передано - установим максимальное
         else if ( fValue == undefined ) fValue = this.DOMElement.scrollLeft;
 
+        // Remove parent container offset to avoid "overscrolling"
+        if (fValue.parent().length) {
+            fValue -= fValue.parent().offset().left;
+        }
+
         // Выполним универсальный аниматор с указанием конкретного параметра
         return this.animate( fValue, 'scrollLeft', speed, finishHandler );
     },
