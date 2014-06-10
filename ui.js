@@ -389,7 +389,7 @@ var SamsonJSUI =
 	pageWidth : function()
 	{	
 		// Вернем текущее значение прокрутки страницы
-		return self.innerWidth || (document.documentElement && document.documentElement.clientWidth) || (document.body && document.body.clientWidth);
+		return (document.documentElement && document.documentElement.clientWidth) || (document.body && document.body.clientWidth) || self.innerWidth;
 	},
 	
 	/**
@@ -406,7 +406,7 @@ var SamsonJSUI =
 		s.trace('document.documentElement.scrollHeight='+document.documentElement.scrollHeight);
 		*/
 		// Вернем текущее значение прокрутки страницы
-		return self.innerHeight || (document.documentElement && document.documentElement.clientHeight) || (document.body && document.body.clientHeight);
+		return (document.documentElement && document.documentElement.clientHeight) || (document.body && document.body.clientHeight) || self.innerHeight;
 	},
 	
 	/**
