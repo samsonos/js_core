@@ -247,19 +247,21 @@ var SamsonJS = (function(selector, parent)
 	 * @memberOf SamsonJS
 	 */
 	SamsonJS.extend = function() 
-	{	
+	{			
 		// Указатель на объект для "расширения"		 
 		target = arguments[0] || {};
 
 		// Если этот аргемент функция
 		if (typeof target == 'object') 
-		{
+		{			
 			// Переберем поля переданного объекта и принимаем только функции		
-			for (name in target) if (typeof target[name] == 'function')
-			{
+			for (var _name in target) if (typeof target[_name] == 'function')
+			{				
 				// Добавим к SamsonJS и к его прототипу новую функцию по имени name
-				SamsonJS[name] = SamsonJS.fn[name] = target[name];
+				SamsonJS[_name] = SamsonJS.fn[_name] = target[_name];
 			}
+			
+			console.log(window.name);
 		}		
 	};
 
@@ -320,7 +322,9 @@ function s( selector, parent ){ return SamsonJS( selector, parent ); };
 (function(window)
 {	
 	// Сделать SamsonJS глобальным и привязать спецсимвол "_"
-	window.SamsonJS = window.S = window.s = SamsonJS;
+	window.SamsonJS = SamsonJS;
+	window.S = SamsonJS;
+	window.s = SamsonJS;
 	
 	// Сообщим всем что SamsonJS успешно загружен
 	s.trace('Framework SamsonJS '+SamsonJS.version+' - successfully loaded');
