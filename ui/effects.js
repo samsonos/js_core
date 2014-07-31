@@ -60,12 +60,12 @@ SamsonJS.extend({
 			// Рассчитаем шаг изменения параметра анимации за один кадр анимации
 			var animation_step = Math.abs( distance / animation_steps_count);
 			
-			s.trace('FC:'+frame_count+',Start:'+cValue+', Stop:'+fValue+',Step:'+animation_step+',Distance:'+distance+',Timer:'+animation_timer);
+			//s.trace('FC:'+frame_count+',Start:'+cValue+', Stop:'+fValue+',Step:'+animation_step+',Distance:'+distance+',Timer:'+animation_timer);
 			
 			// Запустим интервал для анимации скроллинга элемента
 			animation = setInterval( function()
 			{			
-				s.trace('cValue:'+cValue+', Step:'+animation_step);
+				//s.trace('cValue:'+cValue+', Step:'+animation_step);
 				
 				// Поправочное условия для изменения величины шага изменения параметра для точного попадания в граничное условие
 				if( Math.abs(Math.abs( fValue ) - cValue) < animation_step ) animation_step = Math.abs( Math.abs( fValue ) - cValue );				
