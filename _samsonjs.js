@@ -259,9 +259,7 @@ var SamsonJS = (function(selector, parent)
 			{				
 				// Добавим к SamsonJS и к его прототипу новую функцию по имени name
 				SamsonJS[_name] = SamsonJS.fn[_name] = target[_name];
-			}
-			
-			console.log(window.name);
+			}		
 		}		
 	};
 
