@@ -12,29 +12,34 @@ var SJSBinder = {
         // Iterate all elements
         return this.each(function(clickable)
         {
+            var busy = false;
             // Bind click event
             clickable.click(function()
             {
-				var beforeHandlerStatus = true;
-                // If external response handler is passed
-                if( beforeHandler ) beforeHandlerStatus = beforeHandler(clickable);
+                if (!busy) {
+                    var beforeHandlerStatus = true;
+                    // If external response handler is passed
+                    if( beforeHandler ) beforeHandlerStatus = beforeHandler(clickable);
 
-                // If external response handler return true status
-				if (beforeHandlerStatus) {
-					// Perform async request
-					s.ajax(clickable.a('href'),function(response)
-					{
-						try
-						{
-							// Parse server response
-							response = JSON.parse(response);
+                    // If external response handler return true status
+                    if (beforeHandlerStatus) {
+                        busy = true;
+                        // Perform async request
+                        s.ajax(clickable.a('href'),function(response)
+                        {
+                            busy = false;
+                            try
+                            {
+                                // Parse server response
+                                response = JSON.parse(response);
 
-							// If external response handler is passed
-							if( responseHandler ) responseHandler( response, clickable );
-						}
-						catch(e){}
-					});
-				}
+                                // If external response handler is passed
+                                if( responseHandler ) responseHandler( response, clickable );
+                            }
+                            catch(e){}
+                        });
+                    }
+                }
             }, true, true );
         });
     },
