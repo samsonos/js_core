@@ -45,6 +45,42 @@ var SJSBinder = {
     },
 
     /**
+     *  Send AJAX request to the url placed in option value when this option is selected
+     * @returns {SamsonJS}
+     */
+    ajaxSelect : function( responseHandler, beforeHandler )
+    {
+        // Iterate all elements
+        return this.each(function(clickable)
+        {
+            // Bind click event
+            clickable.change(function(clickable, options, event, selected)
+            {
+                var beforeHandlerStatus = true;
+                // If external response handler is passed
+                if( beforeHandler ) beforeHandlerStatus = beforeHandler(clickable);
+
+                // If external response handler return true status
+                if (beforeHandlerStatus) {
+                    // Perform async request
+                    s.ajax(selected.val(),function(response)
+                    {
+                        try
+                        {
+                            // Parse server response
+                            response = JSON.parse(response);
+
+                            // If external response handler is passed
+                            if( responseHandler ) responseHandler( response, clickable );
+                        }
+                        catch(e){}
+                    });
+                }
+            }, true, true );
+        });
+    },
+    
+    /**
      *
      * @param responseHandler
      */
