@@ -69,7 +69,7 @@ SamsonJS.extend({
 			try {
 			data = JSON.stringify(data);
 			} catch(e) {
-				console.log('Error sending not form data, e);
+				console.log('Error sending not form data', e);
 			}
 			
 		}
