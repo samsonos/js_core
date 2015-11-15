@@ -65,7 +65,7 @@ SamsonJS.extend({
 		// Если нам передали НЕ форму
 		if( (window.FormData === undefined) || !( data instanceof FormData) ) 
 		{	
-			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			sjsXHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			try {
 			data = JSON.stringify(data);
 			} catch(e) {
