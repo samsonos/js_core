@@ -30,7 +30,7 @@ SamsonJS.extend({
 			// Установим прозрачность элемента (для IE)
 			if(s.IEVersionLowerThan(9)) elm.css('filter', ' alpha(opacity = ' + (newOpVal*100) + ')');
 			// Установим прозрачность элемента
-			else elm.css('opacity', newOpVal ); 
+			else elm.css('opacity', newOpVal );
 			  
 			// Запустим таймер на выполнение анимации
 			setTimeout( function(){ elm._fadeAnimation( currentTick + _speed, totalTicks, speed, elm, handler ); }, 33 );
@@ -44,7 +44,7 @@ SamsonJS.extend({
 			// Установим прозрачность элемента (для IE)
 			if(s.IEVersionLowerThan(9)) elm.css('filter', 'alpha(opacity = ' + (endOpVal*100) + ')');
 			// Установим прозрачность элемента
-			else elm.css('opacity', endOpVal ); 
+			else elm.css('opacity', endOpVal );
 			
 			// Если передан обработчик завершения анимации
 			if( handler ) handler( elm );
@@ -76,24 +76,9 @@ SamsonJS.extend({
 			// Установим прозрачность элемента
 			obj.css('opacity', 0.0 );
 			
-			if( obj.css('background-image') )
-			{
-				// Получим путь к фону
-				var img_path = obj.css('background-image');						
-				
-				// Отрежим лишнее
-				img_path = img_path.substr( 4, img_path.length - 5 );
-
-				// Установим специальное CSS поле
-				//obj.css('-samsonjs-filter',"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+img_path+"', sizingMethod='scale') alpha(opacity = 0)");	
-			}
-			
 			// Выполним анимацию
 			obj._fadeAnimation( 0, 1000, speed, obj, function( obj )
-			{			
-				// Установим прозрачность элемента (для IE)
-				obj.css('filter', '');
-				
+			{
 				// Установим прозрачность элемента (для IE)
 				obj.css('opacity', '');
 				
@@ -130,9 +115,6 @@ SamsonJS.extend({
 				
 				// Установим прозрачность элемента (для IE)
 				obj.css('opacity', '');
-				
-				// Установим прозрачность элемента (для IE)
-				obj.css('filter', '');
 				
 				// Обработчик завершения анимации
 				if( finishHandler ) finishHandler( obj );
