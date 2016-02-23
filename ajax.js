@@ -64,15 +64,14 @@ SamsonJS.extend({
 			
 		// Если нам передали НЕ форму
 		if( (window.FormData === undefined) || !( data instanceof FormData) ) 
-		{		
-			// Установим правильные заголовки
-			sjsXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		{	
+			sjsXHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			try {
+			data = JSON.stringify(data);
+			} catch(e) {
+				console.log('Error sending not form data', e);
+			}
 			
-			// Если нам передан объект
-			if( typeof(data) === 'object' ){ alert('Обработка объектов(Object) для ассинхронной отправки пока не реализована'); }
-			else if( typeof(data) === 'array' ){ alert('Обработка массивов(Array) для ассинхронной отправки пока не реализована'); }
-			
-			//data = encodeURIComponent(data);
 		}
 		
 		// Add special async header
