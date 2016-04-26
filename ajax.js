@@ -14,75 +14,81 @@ SamsonJS.extend({
 	 * @param data Коллекция POST параметров для отправки контроллеру
 	 * @param completeHandler Обработчик завершения запроса к контроллеру
 	 * @param beforeHandler Обработчик вызываемый перед запросом к контроллеру
+	 * @param type AJAX request type
 	 */
-	ajax : function( url, successHandler, data, completeHandler, beforeHandler, type )
-	{	
+	ajax : function( url, successHandler, data, completeHandler, beforeHandler, type ) {
 		// Указатель на самого себя
 		var _self = this;
-		
+
 		// Укаазатель на текущий объект для ассинхронного запроса
 		var sjsXHR = null;
-		
+
 		// Проверим переданный URL для запроса
-		if( ! url ) return false;
-		
+		if (!url) {
+			return false;
+		}
+
+		// Add trailing slash
+		url = url.replace(/\/?$/, '/');
+
 		// Кроссбраузерное получение объекта для AJAX запросов
-		if ( typeof XMLHttpRequest != 'undefined') sjsXHR = new XMLHttpRequest();
-		else if ( typeof ActiveXObject != 'undefined')
-		{
+		if (typeof XMLHttpRequest != 'undefined') {
+			sjsXHR = new XMLHttpRequest();
+		} else if(typeof ActiveXObject != 'undefined') {
 			// IE > 6
-			try{ sjsXHR = new ActiveXObject("Msxml2.XMLHTTP"); }
-			// IE 5,6
-			catch(e){ 
-				try{
-					sjsXHR = new ActiveXObject("Microsoft.XMLHTTP"); 
-				}
-				catch(e){}
+			try {
+				sjsXHR = new ActiveXObject("Msxml2.XMLHTTP");
 			}
-		}	
-		//else if ( typeof XMLHttpRequest != 'undefined') sjsXHR = new XMLHttpRequest();
-		
+				// IE 5,6
+			catch (e) {
+				try {
+					sjsXHR = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch (e) {
+				}
+			}
+		}
+
 		// Обработчик получения ответа от сервера
-		sjsXHR.onreadystatechange = function() 
-		{
+		sjsXHR.onreadystatechange = function () {
 			// Если это финальная стадия обработки асинхронного запроса
-			if ( sjsXHR.readyState == 4 ) 
-			{
+			if (sjsXHR.readyState == 4) {
 				// Если указан обработчик успешного ответа от сервера
-				if( ( sjsXHR.status == 200 ) && successHandler ) successHandler( sjsXHR.responseText.trim(), sjsXHR.status, sjsXHR );
-				
+				if (( sjsXHR.status == 200 ) && successHandler) {
+					successHandler(sjsXHR.responseText.trim(), sjsXHR.status, sjsXHR);
+				}
+
 				// Если задан обработчик завершения запроса к контроллеру 
-				if( completeHandler ) completeHandler( sjsXHR.responseText, sjsXHR.status, sjsXHR  );
-			}			
+				if (completeHandler) {
+					completeHandler(sjsXHR.responseText, sjsXHR.status, sjsXHR);
+				}
+			}
 		};
-		
-		// По умолчанию отправляем POST
-		if (!type) type = 'POST';
-		
-		// Установим параметры запроса	
-		sjsXHR.open( type, url, true, "", "" );        
-			
+
+		// Установим параметры запроса, умолчанию отправляем POST
+		sjsXHR.open(type !== 'undefined' ? 'POST' : type, url, true);
+
 		// Если нам передали НЕ форму
-		if( (window.FormData === undefined) || !( data instanceof FormData) ) 
-		{	
+		if ((window.FormData === undefined) || !( data instanceof FormData)) {
 			sjsXHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			try {
-			data = JSON.stringify(data);
-			} catch(e) {
+				data = JSON.stringify(data);
+			} catch (e) {
 				console.log('Error sending not form data', e);
 			}
-			
 		}
-		
+
 		// Add special async header
-        sjsXHR.setRequestHeader('SJSAsync', 'true');
-		
+		sjsXHR.setRequestHeader('SJSAsync', 'true');
+
 		// Обработчик перед отправкой запроса
-		if( beforeHandler ) beforeHandler( url, data );
-		
+		if (beforeHandler) {
+			beforeHandler(url, data);
+		}
+
 		// Выполним запрос к контроллеру
-		sjsXHR.send( data );  	
-		
+		sjsXHR.send(data);
+
 		// Вернем себя для цепирования
 		return _self;
 	},
@@ -343,5 +349,4 @@ SamsonJS.extend({
 		    }
 		}
 	}
-	
 });
