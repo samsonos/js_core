@@ -31,11 +31,11 @@ var SJSBinder = {
                             try
                             {
                                 // Parse JSON only if this is not an object
-                                if (typeof(serverResponse) !== "object") {
+                                if (typeof(response) !== "object") {
                                     // Parse JSON response
-                                    serverResponse = JSON.parse(serverResponse);
+                                    response = JSON.parse(response);
                                 }
-
+                                
                                 // If external response handler is passed
                                 if( responseHandler ) responseHandler( response, clickable );
                             }
@@ -71,9 +71,9 @@ var SJSBinder = {
                         try
                         {
                             // Parse JSON only if this is not an object
-                            if (typeof(serverResponse) !== "object") {
+                            if (typeof(response) !== "object") {
                                 // Parse JSON response
-                                serverResponse = JSON.parse(serverResponse);
+                                response = JSON.parse(response);
                             }
 
                             // If external response handler is passed
@@ -108,11 +108,11 @@ var SJSBinder = {
 						try
 						{
                             // Parse JSON only if this is not an object
-                            if (typeof(serverResponse) !== "object") {
+                            if (typeof(response) !== "object") {
                                 // Parse JSON response
-                                serverResponse = JSON.parse(serverResponse);
+                                response = JSON.parse(response);
                             }
-
+                            
 							// If external response handler is passed
 							if( responseHandler ) responseHandler( response, form);
 						}
