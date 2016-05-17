@@ -30,8 +30,11 @@ var SJSBinder = {
                             busy = false;
                             try
                             {
-                                // Parse server response
-                                response = JSON.parse(response);
+                                // Parse JSON only if this is not an object
+                                if (typeof(serverResponse) !== "object") {
+                                    // Parse JSON response
+                                    serverResponse = JSON.parse(serverResponse);
+                                }
 
                                 // If external response handler is passed
                                 if( responseHandler ) responseHandler( response, clickable );
@@ -67,8 +70,11 @@ var SJSBinder = {
                     {
                         try
                         {
-                            // Parse server response
-                            response = JSON.parse(response);
+                            // Parse JSON only if this is not an object
+                            if (typeof(serverResponse) !== "object") {
+                                // Parse JSON response
+                                serverResponse = JSON.parse(serverResponse);
+                            }
 
                             // If external response handler is passed
                             if( responseHandler ) responseHandler( response, clickable );
@@ -101,8 +107,11 @@ var SJSBinder = {
 					{
 						try
 						{
-							// Parse server response
-							response = JSON.parse(response);
+                            // Parse JSON only if this is not an object
+                            if (typeof(serverResponse) !== "object") {
+                                // Parse JSON response
+                                serverResponse = JSON.parse(serverResponse);
+                            }
 
 							// If external response handler is passed
 							if( responseHandler ) responseHandler( response, form);
