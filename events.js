@@ -183,7 +183,7 @@ SamsonJS.extend({
 	pageInit : function( pageInitHandler )
 	{	
 		// Указатель на самого себя
-		var _self = this;		
+		var _self = this;
 		
 		// If no handler is passed
 		if( pageInitHandler == undefined ) return this; 
@@ -199,7 +199,7 @@ SamsonJS.extend({
 			
 			// После загрузки документа попытаемся получить элемент
 			// по указаному селектору
-			var element = SamsonJS( _self.selector );			
+			var element = SamsonJS( _self.selector );
 			
 			// Если текущий элемент найден
 			if( element.length && pageInitHandler ) 
