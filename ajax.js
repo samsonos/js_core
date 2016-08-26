@@ -22,17 +22,19 @@ SamsonJS.extend({
 
             xhr.onload = function () {
                 if (this.status == 200) {
+                    var response = this.response;
+
                     // Convert response to JSON object
                     try {
-                        var response = JSON.parse(this.response);
-
-                        if (response && response.status !== 0) {
-                            resolve(response);
-                        } else { // Call reject with response object
-                            throw new Error(response);
-                        }
+                        response = JSON.parse(response);
                     } catch (e) {
-                        throw new Error('JSON response parsing:' + e);
+                        throw 'JSON response parsing:' + e.toString();
+                    }
+
+                    if (response && response.status !== 0) {
+                        resolve(response);
+                    } else { // Call reject with response object
+                        reject(response);
                     }
                 } else {
                     var error = new Error(this.statusText);
